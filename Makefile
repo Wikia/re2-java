@@ -11,8 +11,8 @@ build: $(OBJ)/libre2-java.so class
 
 .re2.download.stamp:
 #	hg clone https://re2.googlecode.com/hg re2
-	wget http://re2.googlecode.com/files/re2-20121029.tgz -O re2.tgz
-	tar xvf re2.tgz
+#	wget http://re2.googlecode.com/files/re2-20121029.tgz -O re2.tgz
+#	tar xvf re2.tgz
 	touch .re2.download.stamp
 
 .re2.compile.stamp: .re2.download.stamp
@@ -24,7 +24,7 @@ $(OBJ)/RE2.o: .re2.download.stamp $(addprefix src/main/java/com/logentries/re2/,
 	$(CXX) -O3 -g -fPIC -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Ire2 -c src/main/java/com/logentries/re2/RE2.cpp -o $(OBJ)/RE2.o
 
 $(OBJ)/libre2-java.so: $(OBJ)/RE2.o .re2.compile.stamp
-	$(CXX) -shared -Wl,-soname,libre2-java.so -o $(OBJ)/libre2-java.so $(OBJ)/RE2.o -Lre2/obj/so -lre2 -lpthread
+	$(CXX) -static -Wl,-soname,libre2-java.so -o $(OBJ)/libre2-java.so $(OBJ)/RE2.o -Lre2/obj/so -lre2 -lpthread
 
 class: build-class
 
@@ -38,8 +38,8 @@ add-so: .re2.compile.stamp $(OBJ)/libre2-java.so
 	cp $(OBJ)/libre2-java.so re2/obj/so/libre2.so $(NATIVES-TARGET)
 
 clean:
-	rm -fr re2
-	rm -f re2.tgz
+#	rm -fr re2
+#	rm -f re2.tgz
 	rm -fr obj
 	rm -fr target
 	rm -fr src/main/resources/NATIVE
