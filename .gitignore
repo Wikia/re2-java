@@ -1,0 +1,6 @@
+.re2.compile.stamp
+.re2.download.stamp
+obj/
+project/
+src/main/resources/
+target/
