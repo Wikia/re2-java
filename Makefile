@@ -19,7 +19,7 @@ build: $(OBJ)/libre2-java.so class
 
 $(OBJ)/RE2.o: .re2.download.stamp $(addprefix src/main/java/com/logentries/re2/, RE2.cpp RE2.h)
 	mkdir -p $(OBJ)
-	$(CXX) -O3 -g -fPIC -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Ire2 -c src/main/java/com/logentries/re2/RE2.cpp -o $(OBJ)/RE2.o
+	$(CXX) -O3 -g -std=c++11 -fPIC -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Ire2 -c src/main/java/com/logentries/re2/RE2.cpp -o $(OBJ)/RE2.o
 
 $(OBJ)/libre2-java.so: $(OBJ)/RE2.o .re2.compile.stamp
 	$(CXX) -shared -Wl,-soname,libre2-java.so -o $(OBJ)/libre2-java.so $(OBJ)/RE2.o -Lre2/obj/so -l:libre2.so -lpthread
