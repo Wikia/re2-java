@@ -14,7 +14,7 @@ build: $(OBJ)/libre2-java.so class
 	touch .re2.download.stamp
 
 .re2.compile.stamp: .re2.download.stamp
-	cd re2 && git apply ../re2-gcc-6.1-patch.diff && make
+	cd re2 && make
 	touch .re2.compile.stamp
 
 $(OBJ)/RE2.o: .re2.download.stamp $(addprefix src/main/java/com/logentries/re2/, RE2.cpp RE2.h)
