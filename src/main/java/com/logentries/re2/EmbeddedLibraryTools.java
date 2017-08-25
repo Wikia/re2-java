@@ -39,6 +39,8 @@ public class EmbeddedLibraryTools {
         String osName = System.getProperty("os.name");
         if (osName.toLowerCase().indexOf("windows") > -1) {
             osName = "Windows";
+        } else if (osName.toLowerCase().indexOf("mac") > -1) {
+            osName = "Darwin";
         }
         return System.getProperty("os.arch") + "/" + osName;
     }
